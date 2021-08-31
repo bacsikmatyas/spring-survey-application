@@ -41,5 +41,8 @@ public class SpringSurveyApplication implements CommandLineRunner{
 
 		System.out.println("Survey questions: "+survey.getQuestions());
 
+		User test_john = userRepository.findUserByName("Test John");
+		System.out.println(test_john);
+
 	}
 }
