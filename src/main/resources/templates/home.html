@@ -15,6 +15,7 @@
             <th>Description</th>
             <th>Type</th>
             <th>Author</th>
+            <th>#</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
             <td th:text="${survey.description}"></td>
             <td th:text="${survey.type}"></td>
             <td th:text="${survey.authorName}"></td>
+            <td><a th:href="@{/survey(id=${survey.id})}" class="btn btn-secondary">Check</a></td>
         </tr>
         </tbody>
     </table>
