@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-    <h1>Survey Webapp</h1>
-    <p>Hello, <span th:text="${homeModel.getName()}" /></p>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div th:replace="fragments/header :: header" id="header">
+            <h1>Survey Webapp</h1>
+        </div>
+        <div id="content">
+            <p>Hello, <span th:text="${homeModel.getName()}" /></p>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Author</th>
+                    <th>#</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="survey : ${surveys}">
+                    <td th:text="${survey.title}"></td>
+                    <td th:text="${survey.description}"></td>
+                    <td th:text="${survey.type}"></td>
+                    <td th:text="${survey.authorName}"></td>
+                    <td><a th:href="@{/survey(id=${survey.id})}" class="btn btn-secondary">Check</a></td>
+                </tr>
+                </tbody>
+            </table>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Author</th>
-            <th>#</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="survey : ${surveys}">
-            <td th:text="${survey.title}"></td>
-            <td th:text="${survey.description}"></td>
-            <td th:text="${survey.type}"></td>
-            <td th:text="${survey.authorName}"></td>
-            <td><a th:href="@{/survey(id=${survey.id})}" class="btn btn-secondary">Check</a></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <a th:href="@{/logout}" class="btn btn-primary">
-       Logout
-    </a>
-</body>
+            <a th:href="@{/logout}" class="btn btn-primary">
+                Logout
+            </a>
+        </div>
+    </body>
 </html>
