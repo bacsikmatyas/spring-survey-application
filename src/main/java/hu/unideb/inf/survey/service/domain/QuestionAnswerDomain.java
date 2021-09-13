@@ -1,7 +1,5 @@
 package hu.unideb.inf.survey.service.domain;
 
-import hu.unideb.inf.survey.domain.entity.SurveyQuestion;
-
 public class QuestionAnswerDomain {
 
     private Long id;
