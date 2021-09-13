@@ -1,10 +1,7 @@
-package hu.unideb.inf.survey.service.domain;
+package hu.unideb.inf.survey.web.survey.model;
 
-public class QuestionAnswerDomain {
-
+public class AnswerDto {
     private Long id;
-
-    private SurveyQuestionDomain question;
 
     private String answerText;
 
@@ -14,14 +11,6 @@ public class QuestionAnswerDomain {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public SurveyQuestionDomain getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(SurveyQuestionDomain question) {
-        this.question = question;
     }
 
     public String getAnswerText() {

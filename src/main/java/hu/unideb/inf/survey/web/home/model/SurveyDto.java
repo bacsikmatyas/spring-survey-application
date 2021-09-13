@@ -1,6 +1,8 @@
 package hu.unideb.inf.survey.web.home.model;
 
 public class SurveyDto {
+    private long id;
+
     private String title;
 
     private String description;
@@ -8,6 +10,14 @@ public class SurveyDto {
     private String type;
 
     private String authorName;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
