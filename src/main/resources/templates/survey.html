@@ -10,14 +10,15 @@
             <h1>Survey Webapp</h1>
         </div>
         <div id="content">
-            <form>
+            <form th:action="@{/submitAnswers}" method="post">
+                <input type="hidden" th:value="${questions.size()}" th:name="numberOfQuestions"/>
                 <fieldset th:each="question, row : ${questions}" class="form-group">
                     <div class="card w-75 p-2 mx-auto my-2">
                         <div class="card-body">
                             <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
                             <div class="col-sm-10">
                                 <div th:each="answer, row : ${question.answers}" class="form-check">
-                                    <input class="form-check-input" type="radio" th:name="'question'+${question.id}" th:id="'question'+${question.id}" value="option1">
+                                    <input class="form-check-input" type="radio" th:name="'question'+${question.id}" th:id="'question'+${question.id}" th:value="${answer.id}">
                                     <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label" th:for="'question'+${question.id}" th:name="'question'+${question.id}"></label>
                                 </div>
                             </div>
