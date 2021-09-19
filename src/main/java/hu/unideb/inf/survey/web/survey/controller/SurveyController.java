@@ -28,19 +28,19 @@ public class SurveyController {
     }
 
     @GetMapping(REQUEST_MAPPING)
-    public String surveyController(@RequestParam(name = "id") long id){
+    public String surveyController(@RequestParam(name = "id") long id) {
 
 
         return "survey";
     }
 
     @ModelAttribute("questions")
-    public List<QuestionDto> questions(@RequestParam(name = "id") long id){
+    public List<QuestionDto> generateQuestions(@RequestParam(name = "id") long id) {
         List<SurveyQuestionDomain> questionsBySurveyId = surveyQuestionService.findSurveyQuestionsBySurveyId(id);
 
         List<QuestionDto> questionDtos = new ArrayList<>();
 
-        for (SurveyQuestionDomain surveyQuestionDomain: questionsBySurveyId){
+        for (SurveyQuestionDomain surveyQuestionDomain : questionsBySurveyId) {
             QuestionDto tmp = surveyQuestionDomainTransformer.from(surveyQuestionDomain);
             questionDtos.add(tmp);
         }
