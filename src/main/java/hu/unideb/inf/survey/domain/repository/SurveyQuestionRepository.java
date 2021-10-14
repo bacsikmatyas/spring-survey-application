@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SurveyQuestionRepository extends CrudRepository<SurveyQuestion, Long> {
     List<SurveyQuestion> findSurveyQuestionsBySurveyId(Long id);
+
+    long countSurveyQuestionsBySurvey_Id(long surveyId);
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SurveyService {
     List<SurveyDomain> findAllOpenSurveys();
+
+    List<SurveyDomain> findUserSurveys(long userId);
 }

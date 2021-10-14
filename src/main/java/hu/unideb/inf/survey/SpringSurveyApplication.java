@@ -2,6 +2,8 @@ package hu.unideb.inf.survey;
 
 import hu.unideb.inf.survey.domain.entity.Survey;
 import hu.unideb.inf.survey.domain.entity.User;
+import hu.unideb.inf.survey.domain.repository.QuestionAnswerRepository;
+import hu.unideb.inf.survey.domain.repository.SelectedAnswerRepository;
 import hu.unideb.inf.survey.domain.repository.SurveyRepository;
 import hu.unideb.inf.survey.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ public class SpringSurveyApplication implements CommandLineRunner{
 
 		UserRepository userRepository = context.getBean(UserRepository.class);
 		SurveyRepository surveyRepository = context.getBean(SurveyRepository.class);
+		SelectedAnswerRepository selectedAnswerRepository = context.getBean(SelectedAnswerRepository.class);
 
 		Iterable<User> users = userRepository.findAll();
 		System.out.println(users);
@@ -43,6 +46,10 @@ public class SpringSurveyApplication implements CommandLineRunner{
 
 		User test_john = userRepository.findUserByName("Test John");
 		System.out.println(test_john);
+
+		System.out.println(selectedAnswerRepository.findSelectedAnswersByAnswer_Question_Survey_Id(1L));
+		System.out.println(selectedAnswerRepository.countSelectedAnswersByAnswer_Question_Survey_Id(1L));
+		System.out.println(selectedAnswerRepository.countSelectedAnswersByAnswer_Id(1L));
 
 	}
 }
