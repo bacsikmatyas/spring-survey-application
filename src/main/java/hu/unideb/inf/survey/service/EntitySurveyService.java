@@ -34,4 +34,16 @@ public class EntitySurveyService implements SurveyService{
 
         return surveyDomains;
     }
+
+    @Override
+    public List<SurveyDomain> findUserSurveys(long userId) {
+        List<Survey> surveys = surveyRepository.findSurveysByUser_Id(userId);
+
+        List<SurveyDomain> surveyDomains = new ArrayList<>();
+        for (Survey survey: surveys){
+            surveyDomains.add(surveyTransformer.from(survey));
+        }
+
+        return surveyDomains;
+    }
 }

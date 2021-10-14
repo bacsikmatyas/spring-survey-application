@@ -11,4 +11,7 @@ public interface SurveyRepository extends CrudRepository<Survey, Long> {
     Survey findSurveyByUser_Id(Long id);
 
     List<Survey> findSurveysByOpen(boolean open);
+
+    List<Survey> findSurveysByUser_Id(Long id);
+
 }

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SurveyQuestionDomainTransformer {
+public class SurveyQuestionDtoTransformer {
 
-    private final QuestionAnswerDomainTransformer questionAnswerDomainTransformer;
+    private final QuestionAnswerDtoTransformer questionAnswerDtoTransformer;
 
     @Autowired
-    public SurveyQuestionDomainTransformer(QuestionAnswerDomainTransformer questionAnswerDomainTransformer) {
-        this.questionAnswerDomainTransformer = questionAnswerDomainTransformer;
+    public SurveyQuestionDtoTransformer(QuestionAnswerDtoTransformer questionAnswerDtoTransformer) {
+        this.questionAnswerDtoTransformer = questionAnswerDtoTransformer;
     }
 
     public QuestionDto from(SurveyQuestionDomain surveyQuestionDomain){
@@ -28,11 +28,20 @@ public class SurveyQuestionDomainTransformer {
 
         List<AnswerDto> answerDtos = new ArrayList<>();
         for(QuestionAnswerDomain questionAnswerDomain: surveyQuestionDomain.getAnswers()){
-            AnswerDto tmp = questionAnswerDomainTransformer.from(questionAnswerDomain);
+            AnswerDto tmp = questionAnswerDtoTransformer.from(questionAnswerDomain);
             answerDtos.add(tmp);
         }
         questionDto.setAnswers(answerDtos);
 
         return questionDto;
+    }
+
+    public List<QuestionDto> from(List<SurveyQuestionDomain> surveyQuestionDomains){
+        List<QuestionDto> questionDtos = new ArrayList<>();
+        for (SurveyQuestionDomain surveyQuestionDomain : surveyQuestionDomains) {
+            QuestionDto tmp = from(surveyQuestionDomain);
+            questionDtos.add(tmp);
+        }
+        return questionDtos;
     }
 }

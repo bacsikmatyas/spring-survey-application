@@ -5,7 +5,7 @@ import hu.unideb.inf.survey.web.survey.model.AnswerDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class QuestionAnswerDomainTransformer {
+public class QuestionAnswerDtoTransformer {
     public AnswerDto from(QuestionAnswerDomain questionAnswerDomain){
         AnswerDto answerDto = new AnswerDto();
 
