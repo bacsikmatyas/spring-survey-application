@@ -21,7 +21,9 @@ public class SurveyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findUserByName(s);
-
+        if(user == null){
+            throw new UsernameNotFoundException("User '"+s+"' not found!");
+        }
         return new SurveyUserDetails(user);
     }
 }
