@@ -57,6 +57,20 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/bootstrap -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.6.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
