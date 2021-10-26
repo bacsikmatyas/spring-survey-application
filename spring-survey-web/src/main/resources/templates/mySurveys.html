@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Surveys</title>
+    <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header" id="header">
+    <h1>Survey Webapp</h1>
+</div>
+<div id="content">
+    <div class="card row border-primary w-75 my-2 mx-auto">
+        <div class="text-white bg-primary card-header">Surveys</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>#</th>
+                        <th>#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="survey : ${mySurveys}">
+                        <td th:text="${survey.title}"></td>
+                        <td th:text="${survey.description}"></td>
+                        <td th:text="${survey.type}"></td>
+                        <td><a th:href="@{/checkSurvey(id=${survey.id})}" class="btn btn-success">Check Answers</a></td>
+                        <td><a th:href="@{/editSurvey(id=${survey.id})}" class="btn btn-secondary">Edit</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

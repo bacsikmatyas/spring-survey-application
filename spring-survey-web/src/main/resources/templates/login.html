@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <a class="navbar-brand text-white">Survey Webapp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+        </div>
+        <div class='login-box container'>
+            <form name="f" th:action="@{/login}" method="post">
+                <fieldset>
+                    <legend>Please Login</legend>
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username and password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        You have been logged out.
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+        <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+    </body>
+</html>
