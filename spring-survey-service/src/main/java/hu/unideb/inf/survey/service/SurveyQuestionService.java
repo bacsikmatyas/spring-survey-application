@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SurveyQuestionService {
     List<SurveyQuestionDomain> findSurveyQuestionsBySurveyId(Long surveyId);
+
+    void deleteSurveyQuestionById(Long questionId);
 }

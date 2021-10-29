@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Survey</title>
+        <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div th:replace="fragments/header :: header" id="header">
+        <h1>Survey Webapp</h1>
+    </div>
+    <div id="content">
+        <fieldset th:each="question, row : ${questions}" class="form-group">
+            <div class="card w-75 p-2 mx-auto my-2">
+                <div class="card-body">
+                    <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
+                    <div class="float-right">
+                        <a th:href="@{/}" class="btn btn-warning">
+                            Edit
+                        </a>
+                        <a th:href="@{/deleteQuestion(id=${question.id})}" class="btn btn-danger">
+                            Delete
+                        </a>
+                    </div>
+                    <div class="col-sm-10">
+                        <div th:each="answer, row : ${question.answers}" class="form-check">
+                            <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label" th:for="'question'+${question.id}" th:name="'question'+${question.id}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="text-center mt-3">
+            <a th:href="@{/mySurveys}" class="btn btn-primary m-auto w-25">
+                Back
+            </a>
+        </div>
+    </div>
+    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+    </body>
+</html>

@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EntitySurveyQuestionService implements SurveyQuestionService {
@@ -34,5 +36,19 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
         }
         logger.info("{} question found for the survey with id of {}!", surveyQuestionDomains.size(), surveyId);
         return surveyQuestionDomains;
+    }
+
+    @Override
+    public void deleteSurveyQuestionById(Long questionId) {
+        logger.info("Deleting of question with the id of {}!", questionId);
+        Optional<SurveyQuestion> question = surveyQuestionRepository.findById(questionId);
+        if (question.isPresent()){
+            SurveyQuestion surveyQuestion = question.get();
+            surveyQuestion.setSurvey(null);
+            surveyQuestionRepository.delete(surveyQuestion);
+        }
+        else{
+            logger.error("There is no question with the id of {}!", questionId);
+        }
     }
 }
