@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +48,42 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
         }
         else{
             logger.error("There is no question with the id of {}!", questionId);
+        }
+    }
+
+    @Override
+    public SurveyQuestionDomain findSurveyQuestionById(Long questionId) {
+        Optional<SurveyQuestion> question = surveyQuestionRepository.findById(questionId);
+        SurveyQuestionDomain surveyQuestionDomain = surveyQuestionTransformer.from(question.get());
+        return surveyQuestionDomain;
+    }
+
+    @Override
+    public void editQuestionText(Long questionId, String questionText) {
+        Optional<SurveyQuestion> questionOptional = surveyQuestionRepository.findById(questionId);
+        if (questionOptional.isPresent()){
+            SurveyQuestion surveyQuestion = questionOptional.get();
+            surveyQuestion.setQuestionText(questionText);
+            surveyQuestionRepository.save(surveyQuestion);
+            logger.info("Question text modified on the question with id of {}", questionId);
+        }
+        else {
+            logger.info("Question with the id of {} cannot be found, no modification!", questionId);
+        }
+    }
+
+    @Override
+    public Long getSurveyIdOfQuestion(Long questionId) {
+        Optional<SurveyQuestion> optionalSurveyQuestion = surveyQuestionRepository.findById(questionId);
+        if (optionalSurveyQuestion.isPresent()){
+            SurveyQuestion surveyQuestion = optionalSurveyQuestion.get();
+            Long surveyId = surveyQuestion.getSurvey().getId();
+            logger.info("The id of the survey with the question with the id of {} is: {}",questionId, surveyId);
+            return surveyId;
+        }
+        else {
+            logger.info("Question with the id of {} not found!",questionId);
+            return null;
         }
     }
 }

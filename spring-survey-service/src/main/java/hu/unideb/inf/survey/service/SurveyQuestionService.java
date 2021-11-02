@@ -8,4 +8,10 @@ public interface SurveyQuestionService {
     List<SurveyQuestionDomain> findSurveyQuestionsBySurveyId(Long surveyId);
 
     void deleteSurveyQuestionById(Long questionId);
+
+    SurveyQuestionDomain findSurveyQuestionById(Long questionId);
+
+    void editQuestionText(Long questionId, String questionText);
+
+    Long getSurveyIdOfQuestion(Long questionId);
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Question</title>
+        <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div th:replace="fragments/header :: header" id="header">
+        <h1>Survey Webapp</h1>
+    </div>
+    <div id="content">
+        <div th:if="${param.successfulSubmit}" class="alert alert-success">
+            Question saved!
+        </div>
+        <div class="w-75 p-2 mx-auto my-2">
+            <form th:action="@{/saveQuestion}">
+                <input type="hidden" th:value="${question.id}" th:name="questionId"/>
+                <div class="form-group">
+                    <label th:for="questionText">Question text</label>
+                    <input th:name="questionText" th:value="${question.questionText}" type="text" class="form-control form-control-lg" th:id="questionText" placeholder="Edit question text" required>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary m-auto w-25">Save texts</button>
+                </div>
+            </form>
+        </div>
+        <fieldset class="form-group">
+            <div class="card w-75 p-2 mx-auto my-2">
+                <div th:each="answer, row : ${question.answers}" class="card-body">
+                    <div class="col-sm-10">
+                        <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"></label>
+                        <div class="float-right">
+                            <a th:href="@{/editQuestion(id=${question.id})}" class="btn btn-warning">
+                                Edit
+                            </a>
+                            <a th:href="@{/deleteQuestion(id=${question.id})}" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="text-center mt-3">
+            <a th:href="@{/editSurvey(id=${surveyId})}" class="btn btn-primary m-auto w-25">
+                Back
+            </a>
+        </div>
+    </div>
+    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+    </body>
+</html>
