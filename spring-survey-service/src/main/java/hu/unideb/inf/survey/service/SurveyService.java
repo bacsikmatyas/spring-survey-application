@@ -8,4 +8,6 @@ public interface SurveyService {
     List<SurveyDomain> findAllOpenSurveys();
 
     List<SurveyDomain> findUserSurveys(long userId);
+
+    SurveyDomain findSurveyById(long surveyId);
 }

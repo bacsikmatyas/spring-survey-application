@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EntitySurveyService implements SurveyService{
@@ -45,5 +46,16 @@ public class EntitySurveyService implements SurveyService{
         }
         logger.info("{} survey found with the user id of {}!", surveyDomains.size(), userId);
         return surveyDomains;
+    }
+
+    @Override
+    public SurveyDomain findSurveyById(long surveyId) {
+        SurveyDomain surveyDomain =  new SurveyDomain();
+        Optional<Survey> surveyOptional = surveyRepository.findById(surveyId);
+        if (surveyOptional.isPresent()){
+            surveyDomain = surveyTransformer.from(surveyOptional.get());
+        }
+        logger.info("Survey found with the id of {}!",surveyId);
+        return surveyDomain;
     }
 }
