@@ -24,7 +24,9 @@
                     <label th:for="surveyDescription">Survey description</label>
                     <input th:name="surveyDescription" th:value="${survey.surveyDescription}" type="text" class="form-control" th:id="surveyDescription" placeholder="Edit description" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary m-auto w-25">Save texts</button>
+                </div>
             </form>
 
         </div>
@@ -48,7 +50,6 @@
                 </div>
             </div>
         </fieldset>
-
         <div class="text-center mt-3">
             <a th:href="@{/mySurveys}" class="btn btn-primary m-auto w-25">
                 Back
