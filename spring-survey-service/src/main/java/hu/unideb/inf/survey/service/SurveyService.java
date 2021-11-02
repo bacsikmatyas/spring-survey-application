@@ -10,4 +10,6 @@ public interface SurveyService {
     List<SurveyDomain> findUserSurveys(long userId);
 
     SurveyDomain findSurveyById(long surveyId);
+
+    void editSurveyTexts(long surveyId, String title, String description);
 }

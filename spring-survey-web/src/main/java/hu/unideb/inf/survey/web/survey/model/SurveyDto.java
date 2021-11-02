@@ -3,11 +3,21 @@ package hu.unideb.inf.survey.web.survey.model;
 import java.util.List;
 
 public class SurveyDto {
+    private long id;
+
     private String surveyTitle;
 
     private String surveyDescription;
 
     private List<QuestionDto> questions;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getSurveyTitle() {
         return surveyTitle;

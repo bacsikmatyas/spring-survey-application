@@ -19,6 +19,7 @@ public class SurveyDtoTransformer {
 
     public SurveyDto from(SurveyDomain surveyDomain){
         SurveyDto surveyDto = new SurveyDto();
+        surveyDto.setId(surveyDomain.getId());
         surveyDto.setSurveyTitle(surveyDomain.getTitle());
         surveyDto.setSurveyDescription(surveyDomain.getDescription());
 

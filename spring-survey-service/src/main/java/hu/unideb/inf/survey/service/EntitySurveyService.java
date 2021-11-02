@@ -54,8 +54,26 @@ public class EntitySurveyService implements SurveyService{
         Optional<Survey> surveyOptional = surveyRepository.findById(surveyId);
         if (surveyOptional.isPresent()){
             surveyDomain = surveyTransformer.from(surveyOptional.get());
+            logger.info("Survey found with the id of {}!",surveyId);
         }
-        logger.info("Survey found with the id of {}!",surveyId);
+        else {
+            logger.info("Survey with the id of {} not found!",surveyId);
+        }
         return surveyDomain;
+    }
+
+    @Override
+    public void editSurveyTexts(long surveyId, String title, String description) {
+        Optional<Survey> optionalSurvey = surveyRepository.findById(surveyId);
+        if (optionalSurvey.isPresent()){
+            Survey survey = optionalSurvey.get();
+            survey.setTitle(title);
+            survey.setDescription(description);
+            surveyRepository.save(survey);
+            logger.info("Survey text modified on the survey with id of {}", surveyId);
+        }
+        else {
+            logger.info("Survey with the id of {} cannot be found, no modification!", surveyId);
+        }
     }
 }

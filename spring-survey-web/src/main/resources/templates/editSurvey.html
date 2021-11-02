@@ -10,12 +10,30 @@
         <h1>Survey Webapp</h1>
     </div>
     <div id="content">
-        <fieldset th:each="question, row : ${questions}" class="form-group">
+        <div th:if="${param.successfulSubmit}" class="alert alert-success">
+            Survey saved!
+        </div>
+        <div class="border-bottom w-75 p-2 mx-auto my-2">
+            <form th:action="@{/saveSurvey}">
+                <input type="hidden" th:value="${survey.id}" th:name="surveyId"/>
+                <div class="form-group">
+                    <label th:for="surveyTitle">Survey title</label>
+                    <input th:name="surveyTitle" th:value="${survey.surveyTitle}" type="text" class="form-control form-control-lg" th:id="surveyTitle" placeholder="Edit title" required>
+                </div>
+                <div class="form-group">
+                    <label th:for="surveyDescription">Survey description</label>
+                    <input th:name="surveyDescription" th:value="${survey.surveyDescription}" type="text" class="form-control" th:id="surveyDescription" placeholder="Edit description" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+        <fieldset th:each="question, row : ${survey.questions}" class="form-group">
             <div class="card w-75 p-2 mx-auto my-2">
                 <div class="card-body">
                     <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
                     <div class="float-right">
-                        <a th:href="@{/}" class="btn btn-warning">
+                        <a th:href="@{/editQuestion(id=${question.id})}" class="btn btn-warning">
                             Edit
                         </a>
                         <a th:href="@{/deleteQuestion(id=${question.id})}" class="btn btn-danger">
