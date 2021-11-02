@@ -39,12 +39,12 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
 
     @Override
     public void deleteSurveyQuestionById(Long questionId) {
-        logger.info("Deleting of question with the id of {}!", questionId);
         Optional<SurveyQuestion> question = surveyQuestionRepository.findById(questionId);
         if (question.isPresent()){
             SurveyQuestion surveyQuestion = question.get();
             surveyQuestion.setSurvey(null);
             surveyQuestionRepository.delete(surveyQuestion);
+            logger.info("Question with the id of {} deleted!", questionId);
         }
         else{
             logger.error("There is no question with the id of {}!", questionId);
@@ -54,8 +54,15 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
     @Override
     public SurveyQuestionDomain findSurveyQuestionById(Long questionId) {
         Optional<SurveyQuestion> question = surveyQuestionRepository.findById(questionId);
-        SurveyQuestionDomain surveyQuestionDomain = surveyQuestionTransformer.from(question.get());
-        return surveyQuestionDomain;
+        if (question.isPresent()) {
+            SurveyQuestion surveyQuestion = question.get();
+            logger.info("Survey question found by the id of {}", questionId);
+            return surveyQuestionTransformer.from(surveyQuestion);
+        }
+        else {
+            logger.info("Survey question not found by the id of {}", questionId);
+            return null;
+        }
     }
 
     @Override
