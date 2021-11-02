@@ -1,8 +1,8 @@
-package hu.unideb.inf.survey.web.survey.transformer;
+package hu.unideb.inf.survey.web.answer.transformer;
 
 import hu.unideb.inf.survey.service.SelectedAnswerService;
 import hu.unideb.inf.survey.service.domain.QuestionAnswerDomain;
-import hu.unideb.inf.survey.web.survey.model.AnswerStatisticDto;
+import hu.unideb.inf.survey.web.answer.model.AnswerStatisticDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

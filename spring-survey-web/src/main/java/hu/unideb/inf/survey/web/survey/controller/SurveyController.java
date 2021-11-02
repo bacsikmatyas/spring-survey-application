@@ -1,20 +1,14 @@
 package hu.unideb.inf.survey.web.survey.controller;
 
-import hu.unideb.inf.survey.service.SurveyQuestionService;
 import hu.unideb.inf.survey.service.SurveyService;
 import hu.unideb.inf.survey.service.domain.SurveyDomain;
-import hu.unideb.inf.survey.service.domain.SurveyQuestionDomain;
-import hu.unideb.inf.survey.web.survey.model.QuestionDto;
 import hu.unideb.inf.survey.web.survey.model.SurveyDto;
 import hu.unideb.inf.survey.web.survey.transformer.SurveyDtoTransformer;
-import hu.unideb.inf.survey.web.survey.transformer.SurveyQuestionDtoTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class SurveyController {

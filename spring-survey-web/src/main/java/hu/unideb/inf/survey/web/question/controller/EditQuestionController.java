@@ -1,8 +1,8 @@
 package hu.unideb.inf.survey.web.question.controller;
 
 import hu.unideb.inf.survey.service.SurveyQuestionService;
-import hu.unideb.inf.survey.web.survey.model.QuestionDto;
-import hu.unideb.inf.survey.web.survey.transformer.SurveyQuestionDtoTransformer;
+import hu.unideb.inf.survey.web.question.model.QuestionDto;
+import hu.unideb.inf.survey.web.question.transformer.SurveyQuestionDtoTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

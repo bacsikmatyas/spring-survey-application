@@ -1,5 +1,7 @@
 package hu.unideb.inf.survey.web.survey.model;
 
+import hu.unideb.inf.survey.web.question.model.QuestionDto;
+
 import java.util.List;
 
 public class SurveyDto {
