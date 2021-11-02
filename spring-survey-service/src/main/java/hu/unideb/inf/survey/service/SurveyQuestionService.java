@@ -13,5 +13,5 @@ public interface SurveyQuestionService {
 
     void editQuestionText(Long questionId, String questionText);
 
-    Long getSurveyIdOfQuestion(Long questionId);
+    Long getSurveyIdByQuestionId(Long questionId);
 }

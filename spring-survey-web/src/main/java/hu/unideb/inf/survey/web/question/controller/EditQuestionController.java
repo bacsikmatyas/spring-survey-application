@@ -34,6 +34,6 @@ public class EditQuestionController {
 
     @ModelAttribute("surveyId")
     public Long getSurveyId(@RequestParam(name = "id") Long questionId){
-        return surveyQuestionService.getSurveyIdOfQuestion(questionId);
+        return surveyQuestionService.getSurveyIdByQuestionId(questionId);
     }
 }

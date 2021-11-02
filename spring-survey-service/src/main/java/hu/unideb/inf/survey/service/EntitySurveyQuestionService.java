@@ -73,7 +73,7 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
     }
 
     @Override
-    public Long getSurveyIdOfQuestion(Long questionId) {
+    public Long getSurveyIdByQuestionId(Long questionId) {
         Optional<SurveyQuestion> optionalSurveyQuestion = surveyQuestionRepository.findById(questionId);
         if (optionalSurveyQuestion.isPresent()){
             SurveyQuestion surveyQuestion = optionalSurveyQuestion.get();
