@@ -20,14 +20,14 @@ public class SurveyQuestionTransformer {
         this.questionAnswerTransformer = questionAnswerTransformer;
     }
 
-    public SurveyQuestionDomain from(SurveyQuestion surveyQuestion){
+    public SurveyQuestionDomain from(SurveyQuestion surveyQuestion) {
         SurveyQuestionDomain surveyQuestionDomain = new SurveyQuestionDomain();
 
         surveyQuestionDomain.setId(surveyQuestion.getId());
         surveyQuestionDomain.setQuestionText(surveyQuestion.getQuestionText());
 
         List<QuestionAnswerDomain> questionAnswerDomains = new ArrayList<>();
-        for(QuestionAnswer questionAnswer: surveyQuestion.getAnswers()){
+        for (QuestionAnswer questionAnswer : surveyQuestion.getAnswers()) {
             QuestionAnswerDomain tmp = questionAnswerTransformer.from(questionAnswer);
             tmp.setQuestion(surveyQuestionDomain);
             questionAnswerDomains.add(tmp);
@@ -35,5 +35,11 @@ public class SurveyQuestionTransformer {
         surveyQuestionDomain.setAnswers(questionAnswerDomains);
 
         return surveyQuestionDomain;
+    }
+
+    public SurveyQuestion from(SurveyQuestionDomain surveyQuestionDomain) {
+        SurveyQuestion surveyQuestion = new SurveyQuestion();
+        surveyQuestion.setQuestionText(surveyQuestionDomain.getQuestionText());
+        return surveyQuestion;
     }
 }

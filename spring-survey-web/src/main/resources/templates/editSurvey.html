@@ -18,11 +18,13 @@
                 <input type="hidden" th:value="${survey.id}" th:name="surveyId"/>
                 <div class="form-group">
                     <label th:for="surveyTitle">Survey title</label>
-                    <input th:name="surveyTitle" th:value="${survey.surveyTitle}" type="text" class="form-control form-control-lg" th:id="surveyTitle" placeholder="Edit title" required>
+                    <input th:name="surveyTitle" th:value="${survey.surveyTitle}" type="text"
+                           class="form-control form-control-lg" th:id="surveyTitle" placeholder="Edit title" required>
                 </div>
                 <div class="form-group">
                     <label th:for="surveyDescription">Survey description</label>
-                    <input th:name="surveyDescription" th:value="${survey.surveyDescription}" type="text" class="form-control" th:id="surveyDescription" placeholder="Edit description" required>
+                    <input th:name="surveyDescription" th:value="${survey.surveyDescription}" type="text"
+                           class="form-control" th:id="surveyDescription" placeholder="Edit description" required>
                 </div>
                 <div class="text-center mt-3">
                     <button type="submit" class="btn btn-primary m-auto w-25">Save texts</button>
@@ -44,14 +46,15 @@
                     </div>
                     <div class="col-sm-10">
                         <div th:each="answer, row : ${question.answers}" class="form-check">
-                            <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label" th:for="'question'+${question.id}" th:name="'question'+${question.id}"></label>
+                            <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"
+                                   th:for="'question'+${question.id}" th:name="'question'+${question.id}"></label>
                         </div>
                     </div>
                 </div>
             </div>
         </fieldset>
         <div class="text-center mt-3">
-            <a th:href="@{/addQuestion}" class="btn btn-success m-auto w-50">
+            <a th:href="@{/addQuestion(surveyId=${survey.id})}" class="btn btn-success m-auto w-50">
                 Add Question
             </a>
         </div>
