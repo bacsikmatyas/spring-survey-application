@@ -1,7 +1,9 @@
 package hu.unideb.inf.survey.service;
 
 import hu.unideb.inf.survey.domain.entity.Survey;
+import hu.unideb.inf.survey.domain.entity.User;
 import hu.unideb.inf.survey.domain.repository.SurveyRepository;
+import hu.unideb.inf.survey.domain.repository.UserRepository;
 import hu.unideb.inf.survey.service.domain.SurveyDomain;
 import hu.unideb.inf.survey.service.transformer.SurveyTransformer;
 import org.slf4j.Logger;
@@ -17,13 +19,15 @@ import java.util.Optional;
 public class EntitySurveyService implements SurveyService{
     private final SurveyRepository surveyRepository;
     private final SurveyTransformer surveyTransformer;
+    private final UserRepository userRepository;
 
     Logger logger = LoggerFactory.getLogger(EntitySurveyService.class);
 
     @Autowired
-    public EntitySurveyService(SurveyRepository surveyRepository, SurveyTransformer surveyTransformer) {
+    public EntitySurveyService(SurveyRepository surveyRepository, SurveyTransformer surveyTransformer, UserRepository userRepository) {
         this.surveyRepository = surveyRepository;
         this.surveyTransformer = surveyTransformer;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -75,5 +79,21 @@ public class EntitySurveyService implements SurveyService{
         else {
             logger.info("Survey with the id of {} cannot be found, no modification!", surveyId);
         }
+    }
+
+    @Override
+    public void saveNewSurvey(SurveyDomain surveyDomain) {
+        Survey survey = surveyTransformer.from(surveyDomain);
+        Long userId = surveyDomain.getUser().getId();
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            survey.setUser(user);
+        }
+        else {
+            logger.info("User not found with id {}",userId);
+        }
+        Survey savedSurvey = surveyRepository.save(survey);
+        logger.info("Survey saved with id {}", savedSurvey.getId());
     }
 }

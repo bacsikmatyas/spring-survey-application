@@ -46,4 +46,13 @@ public class SurveyTransformer {
 
         return surveyDomain;
     }
+
+    public Survey from(SurveyDomain surveyDomain){
+        Survey survey = new Survey();
+        survey.setTitle(surveyDomain.getTitle());
+        survey.setDescription(surveyDomain.getDescription());
+        survey.setType(surveyDomain.getType());
+        survey.setOpen(surveyDomain.getOpen());
+        return survey;
+    }
 }

@@ -1,9 +1,9 @@
-package hu.unideb.inf.survey.service.transformer;
+package hu.unideb.inf.survey.service;
 
 import hu.unideb.inf.survey.domain.entity.QuestionAnswer;
 import hu.unideb.inf.survey.domain.repository.QuestionAnswerRepository;
-import hu.unideb.inf.survey.service.QuestionAnswerService;
 import hu.unideb.inf.survey.service.domain.QuestionAnswerDomain;
+import hu.unideb.inf.survey.service.transformer.QuestionAnswerTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
