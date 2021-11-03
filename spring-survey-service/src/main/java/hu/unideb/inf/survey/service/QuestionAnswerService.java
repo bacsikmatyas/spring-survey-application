@@ -10,4 +10,6 @@ public interface QuestionAnswerService {
     void editAnswerText(Long answerId, String answerText);
 
     void deleteQuestionAnswerById(Long answerId);
+
+    void saveNewAnswer(QuestionAnswerDomain questionAnswerDomain);
 }

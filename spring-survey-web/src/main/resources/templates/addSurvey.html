@@ -10,9 +10,6 @@
         <h1>Survey Webapp</h1>
     </div>
     <div id="content">
-        <div th:if="${param.successfulSubmit}" class="alert alert-success">
-            Survey saved!
-        </div>
         <div class="w-75 p-2 mx-auto my-2">
             <form th:action="@{/saveNewSurvey}">
                 <div class="form-group">

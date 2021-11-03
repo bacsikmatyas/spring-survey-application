@@ -1,7 +1,9 @@
 package hu.unideb.inf.survey.service;
 
 import hu.unideb.inf.survey.domain.entity.QuestionAnswer;
+import hu.unideb.inf.survey.domain.entity.SurveyQuestion;
 import hu.unideb.inf.survey.domain.repository.QuestionAnswerRepository;
+import hu.unideb.inf.survey.domain.repository.SurveyQuestionRepository;
 import hu.unideb.inf.survey.service.domain.QuestionAnswerDomain;
 import hu.unideb.inf.survey.service.transformer.QuestionAnswerTransformer;
 import org.slf4j.Logger;
@@ -15,13 +17,15 @@ import java.util.Optional;
 public class EntityQuestionAnswerService implements QuestionAnswerService {
     private final QuestionAnswerRepository questionAnswerRepository;
     private final QuestionAnswerTransformer questionAnswerTransformer;
+    private final SurveyQuestionRepository surveyQuestionRepository;
 
     private final Logger logger = LoggerFactory.getLogger(EntityQuestionAnswerService.class);
 
     @Autowired
-    public EntityQuestionAnswerService(QuestionAnswerRepository questionAnswerRepository, QuestionAnswerTransformer questionAnswerTransformer) {
+    public EntityQuestionAnswerService(QuestionAnswerRepository questionAnswerRepository, QuestionAnswerTransformer questionAnswerTransformer, SurveyQuestionRepository surveyQuestionRepository) {
         this.questionAnswerRepository = questionAnswerRepository;
         this.questionAnswerTransformer = questionAnswerTransformer;
+        this.surveyQuestionRepository = surveyQuestionRepository;
     }
 
     @Override
@@ -75,5 +79,21 @@ public class EntityQuestionAnswerService implements QuestionAnswerService {
         } else {
             logger.error("There is no answer with the id of {}!", answerId);
         }
+    }
+
+    @Override
+    public void saveNewAnswer(QuestionAnswerDomain questionAnswerDomain) {
+        QuestionAnswer questionAnswer = questionAnswerTransformer.from(questionAnswerDomain);
+        Long questionId = questionAnswerDomain.getQuestion().getId();
+        Optional<SurveyQuestion> optionalSurveyQuestion = surveyQuestionRepository.findById(questionId);
+        if (optionalSurveyQuestion.isPresent()){
+            SurveyQuestion surveyQuestion = optionalSurveyQuestion.get();
+            questionAnswer.setQuestion(surveyQuestion);
+        }
+        else {
+            logger.info("Question not found with id {}", questionId);
+        }
+        QuestionAnswer savedAnswer = questionAnswerRepository.save(questionAnswer);
+        logger.info("Answer saved with id {}", savedAnswer.getId());
     }
 }

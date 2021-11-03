@@ -43,7 +43,7 @@
             </div>
         </fieldset>
         <div class="text-center mt-3">
-            <a th:href="@{/addAnswer}" class="btn btn-success m-auto w-50">
+            <a th:href="@{/addAnswer(questionId=${question.id})}" class="btn btn-success m-auto w-50">
                 Add Answer
             </a>
         </div>

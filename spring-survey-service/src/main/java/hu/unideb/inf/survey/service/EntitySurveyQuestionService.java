@@ -21,7 +21,7 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
     private final SurveyQuestionTransformer surveyQuestionTransformer;
     private final SurveyRepository surveyRepository;
 
-    Logger logger = LoggerFactory.getLogger(EntitySurveyQuestionService.class);
+    private final Logger logger = LoggerFactory.getLogger(EntitySurveyQuestionService.class);
 
     @Autowired
     public EntitySurveyQuestionService(SurveyQuestionRepository surveyQuestionRepository, SurveyQuestionTransformer surveyQuestionTransformer, SurveyRepository surveyRepository) {
@@ -103,7 +103,7 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
             Survey survey = optionalSurvey.get();
             surveyQuestion.setSurvey(survey);
         } else {
-            logger.info("User not found with id {}", surveyId);
+            logger.info("Survey not found with id {}", surveyId);
         }
         SurveyQuestion savedQuestion = surveyQuestionRepository.save(surveyQuestion);
         logger.info("Question saved with id {}", savedQuestion.getId());
