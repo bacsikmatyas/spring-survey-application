@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserTransformer {
-    public UserDomain from(User user){
+    public UserDomain from(User user) {
         UserDomain userDomain = new UserDomain();
 
         userDomain.setId(user.getId());
@@ -15,5 +15,16 @@ public class UserTransformer {
         userDomain.setRole(user.getRole());
 
         return userDomain;
+    }
+
+    public User from(UserDomain userDomain) {
+        User user = new User();
+
+        user.setId(userDomain.getId());
+        user.setName(userDomain.getName());
+        user.setPassword(userDomain.getPassword());
+        user.setRole(userDomain.getRole());
+
+        return user;
     }
 }
