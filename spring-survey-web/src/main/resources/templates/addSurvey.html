@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add Survey</title>
+        <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div th:replace="fragments/header :: header" id="header">
+        <h1>Survey Webapp</h1>
+    </div>
+    <div id="content">
+        <div class="w-75 p-2 mx-auto my-2">
+            <form th:action="@{/saveNewSurvey}">
+                <div class="form-group">
+                    <label th:for="surveyTitle">Survey title</label>
+                    <input th:name="surveyTitle" type="text" class="form-control form-control-lg" th:id="surveyTitle"
+                           placeholder="Enter title" required>
+                </div>
+                <div class="form-group">
+                    <label th:for="surveyDescription">Survey description</label>
+                    <input th:name="surveyDescription" type="text" class="form-control" th:id="surveyDescription"
+                           placeholder="Enter description" required>
+                </div>
+                <div class="form-group">
+                    <label th:for="surveyType">Survey description</label>
+                    <input th:name="surveyType" type="text" class="form-control" th:id="surveyType" placeholder="Enter type"
+                           required>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-success m-auto w-50">Submit new survey</button>
+                </div>
+            </form>
+        </div>
+        <div class="text-center mt-3">
+            <a th:href="@{/mySurveys}" class="btn btn-primary m-auto w-25">
+                Back
+            </a>
+        </div>
+    </div>
+    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+    </body>
+</html>

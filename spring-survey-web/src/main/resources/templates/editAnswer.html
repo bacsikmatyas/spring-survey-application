@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Answer</title>
+    <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header" id="header">
+    <h1>Survey Webapp</h1>
+</div>
+<div id="content">
+    <div th:if="${param.successfulSubmit}" class="alert alert-success">
+        Answer saved!
+    </div>
+    <div class="w-75 p-2 mx-auto my-2">
+        <form th:action="@{/saveAnswer}">
+            <input type="hidden" th:value="${answer.id}" th:name="answerId"/>
+            <div class="form-group">
+                <label th:for="answerText">Answer text</label>
+                <input th:name="answerText" th:value="${answer.answerText}" type="text" class="form-control form-control-lg" th:id="answerText" placeholder="Edit answer text" required>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary m-auto w-25">Save text</button>
+            </div>
+        </form>
+    </div>
+    <div class="text-center mt-3">
+        <a th:href="@{/editQuestion(id=${questionId})}" class="btn btn-primary m-auto w-25">
+            Back
+        </a>
+    </div>
+</div>
+<script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+<script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

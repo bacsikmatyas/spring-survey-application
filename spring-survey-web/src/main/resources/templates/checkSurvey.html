@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Check Survey</title>
-    <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-<div th:replace="fragments/header :: header" id="header">
-    <h1>Survey Webapp</h1>
-</div>
-<div id="content">
-    <div class="card w-50 p-2 mx-auto my-2">
-        <div class="card-body">
-            <p>Number of survey taken: <span th:text="${surveyData.countOfSurveyTaken}"></span></p>
-        </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Check Survey</title>
+        <link rel="stylesheet" href="webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div th:replace="fragments/header :: header" id="header">
+        <h1>Survey Webapp</h1>
     </div>
-        <fieldset th:each="question, row : ${surveyData.questionStatistics}" class="form-group">
-            <div class="card w-75 p-2 mx-auto my-2">
-                <div class="card-body">
-                    <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
-                    <div class="col-sm-10">
-                        <div th:each="answer, row : ${question.answerStatistics}" class="form-check">
-                            <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"></label>
-                            <div class="progress">
-                                <div class="progress-bar" th:text="${answer.percentage}+'%'" th:style="'width: '+${answer.percentage}+'%;'" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div id="content">
+        <div class="card w-50 p-2 mx-auto my-2">
+            <div class="card-body">
+                <p>Number of survey taken: <span th:text="${surveyData.countOfSurveyTaken}"></span></p>
+            </div>
+        </div>
+            <fieldset th:each="question, row : ${surveyData.questionStatistics}" class="form-group">
+                <div class="card w-75 p-2 mx-auto my-2">
+                    <div class="card-body">
+                        <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
+                        <div class="col-sm-10">
+                            <div th:each="answer, row : ${question.answerStatistics}" class="form-check">
+                                <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"></label>
+                                <div class="progress">
+                                    <div class="progress-bar" th:text="${answer.percentage}+'%'" th:style="'width: '+${answer.percentage}+'%;'" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </fieldset>
+            </fieldset>
 
-    <div class="text-center mt-3">
-        <a href="/" class="btn btn-primary m-auto w-25">
-            Back
-        </a>
+        <div class="text-center mt-3">
+            <a th:href="@{/mySurveys}" class="btn btn-primary m-auto w-25">
+                Back
+            </a>
+        </div>
     </div>
-</div>
-<script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
-<script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
-</body>
+    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+    </body>
 </html>

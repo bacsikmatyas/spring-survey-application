@@ -1,4 +1,4 @@
-package hu.unideb.inf.survey.web.survey.model;
+package hu.unideb.inf.survey.web.answer.model;
 
 public class AnswerDto {
     private Long id;

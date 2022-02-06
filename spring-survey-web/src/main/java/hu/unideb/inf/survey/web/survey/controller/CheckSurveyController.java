@@ -2,13 +2,10 @@ package hu.unideb.inf.survey.web.survey.controller;
 
 import hu.unideb.inf.survey.service.SelectedAnswerService;
 import hu.unideb.inf.survey.service.SurveyQuestionService;
-import hu.unideb.inf.survey.service.domain.SelectedAnswerDomain;
 import hu.unideb.inf.survey.service.domain.SurveyQuestionDomain;
-import hu.unideb.inf.survey.web.survey.model.QuestionDto;
-import hu.unideb.inf.survey.web.survey.model.QuestionStatisticDto;
+import hu.unideb.inf.survey.web.question.model.QuestionStatisticDto;
 import hu.unideb.inf.survey.web.survey.model.SurveyDataDto;
-import hu.unideb.inf.survey.web.survey.transformer.QuestionStatisticDtoTransformer;
-import hu.unideb.inf.survey.web.survey.transformer.SurveyQuestionDtoTransformer;
+import hu.unideb.inf.survey.web.question.transformer.QuestionStatisticDtoTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +21,12 @@ public class CheckSurveyController {
 
     private final SelectedAnswerService selectedAnswerService;
     private final SurveyQuestionService surveyQuestionService;
-
-    private final SurveyQuestionDtoTransformer surveyQuestionDtoTransformer;
     private final QuestionStatisticDtoTransformer questionStatisticDtoTransformer;
 
     @Autowired
-    public CheckSurveyController(SelectedAnswerService selectedAnswerService, SurveyQuestionService surveyQuestionService, SurveyQuestionDtoTransformer surveyQuestionDtoTransformer, QuestionStatisticDtoTransformer questionStatisticDtoTransformer) {
+    public CheckSurveyController(SelectedAnswerService selectedAnswerService, SurveyQuestionService surveyQuestionService, QuestionStatisticDtoTransformer questionStatisticDtoTransformer) {
         this.selectedAnswerService = selectedAnswerService;
         this.surveyQuestionService = surveyQuestionService;
-        this.surveyQuestionDtoTransformer = surveyQuestionDtoTransformer;
         this.questionStatisticDtoTransformer = questionStatisticDtoTransformer;
     }
 

@@ -1,4 +1,6 @@
-package hu.unideb.inf.survey.web.survey.model;
+package hu.unideb.inf.survey.web.question.model;
+
+import hu.unideb.inf.survey.web.answer.model.AnswerStatisticDto;
 
 import java.util.List;
 

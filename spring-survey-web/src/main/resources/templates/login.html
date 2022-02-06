@@ -24,6 +24,9 @@
                     <div th:if="${param.logout}" class="alert alert-success">
                         You have been logged out.
                     </div>
+                    <div th:if="${param.registratedSuccesfully}" class="alert alert-success">
+                        Registration successful! You can log in now.
+                    </div>
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username">
@@ -32,8 +35,13 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary m-auto w-50">Log in!</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a th:href="@{/registration}" class="btn btn-warning m-auto w-25">
+                            Or register!
+                        </a>
                     </div>
                 </fieldset>
             </form>

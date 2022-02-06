@@ -14,4 +14,10 @@ public class QuestionAnswerTransformer {
 
         return questionAnswerDomain;
     }
+
+    public QuestionAnswer from(QuestionAnswerDomain questionAnswerDomain){
+        QuestionAnswer questionAnswer = new QuestionAnswer();
+        questionAnswer.setAnswerText(questionAnswerDomain.getAnswerText());
+        return questionAnswer;
+    }
 }
