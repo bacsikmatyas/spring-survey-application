@@ -21,9 +21,11 @@ public class SaveNewQuestionController {
 
     @RequestMapping(REQUEST_MAPPING)
     public String saveNewQuestionController(@ModelAttribute(name = "surveyId") Long surveyId,
-                                            @ModelAttribute(name = "questionText") String questionText) {
+                                            @ModelAttribute(name = "questionText") String questionText,
+                                            @ModelAttribute(name = "multiselect") boolean multiselect) {
         SurveyQuestionDomain surveyQuestionDomain = new SurveyQuestionDomain();
         surveyQuestionDomain.setQuestionText(questionText);
+        surveyQuestionDomain.setMultiselect(multiselect);
         SurveyDomain surveyDomain = new SurveyDomain();
         surveyDomain.setId(surveyId);
         surveyQuestionDomain.setSurvey(surveyDomain);

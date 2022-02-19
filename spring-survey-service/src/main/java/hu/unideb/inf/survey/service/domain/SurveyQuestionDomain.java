@@ -12,6 +12,8 @@ public class SurveyQuestionDomain {
 
     private String questionText;
 
+    private boolean multiselect;
+
     public Long getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class SurveyQuestionDomain {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
+    }
+
+    public boolean isMultiselect() {
+        return multiselect;
+    }
+
+    public void setMultiselect(boolean multiselect) {
+        this.multiselect = multiselect;
     }
 }

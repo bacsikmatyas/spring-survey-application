@@ -68,11 +68,12 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
     }
 
     @Override
-    public void editQuestionText(Long questionId, String questionText) {
+    public void editQuestionText(Long questionId, String questionText, boolean multiselect) {
         Optional<SurveyQuestion> questionOptional = surveyQuestionRepository.findById(questionId);
         if (questionOptional.isPresent()) {
             SurveyQuestion surveyQuestion = questionOptional.get();
             surveyQuestion.setQuestionText(questionText);
+            surveyQuestion.setMultiselect(multiselect);
             surveyQuestionRepository.save(surveyQuestion);
             logger.info("Question text modified on the question with id of {}", questionId);
         } else {

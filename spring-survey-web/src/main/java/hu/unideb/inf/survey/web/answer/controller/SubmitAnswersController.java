@@ -17,7 +17,6 @@ public class SubmitAnswersController {
     private static final String REQUEST_MAPPING = "/submitAnswers";
 
     private static final String HOMEPAGE_WITH_SUCCESS = "/?successfulSubmit";
-    private static final String HOMEPAGE_WITH_FAILURE = "/?failedSubmit";
 
     private final SelectedAnswerService selectedAnswerService;
 
@@ -30,29 +29,12 @@ public class SubmitAnswersController {
     public String submitAnswersController(@CookieValue("currentUserId") String currentUserIdString,
                                           HttpServletRequest servletRequest) {
 
-        long numberOfQuestions = getNumberOfQuestions(servletRequest);
         List<Long> selectedIds = getSelectedIds(servletRequest);
-        System.out.println(selectedIds);
-        System.out.println(numberOfQuestions);
-
-        if (notEnoughAnswersSelected(numberOfQuestions, selectedIds)) {
-            return "redirect:" + HOMEPAGE_WITH_FAILURE;
-        } else {
-            long currentUserId = Long.parseLong(currentUserIdString);
-            for (long answerId : selectedIds) {
-                selectedAnswerService.saveNewSelectedAnswer(answerId, currentUserId);
-            }
-            return "redirect:" + HOMEPAGE_WITH_SUCCESS;
+        long currentUserId = Long.parseLong(currentUserIdString);
+        for (long answerId : selectedIds) {
+            selectedAnswerService.saveNewSelectedAnswer(answerId, currentUserId);
         }
-    }
-
-    private boolean notEnoughAnswersSelected(long numberOfQuestions, List<Long> selectedIds) {
-        return selectedIds.size() != numberOfQuestions;
-    }
-
-    private long getNumberOfQuestions(HttpServletRequest servletRequest) {
-        String numberOfQuestionsString = servletRequest.getParameter("numberOfQuestions");
-        return Long.parseLong(numberOfQuestionsString);
+        return "redirect:" + HOMEPAGE_WITH_SUCCESS;
     }
 
     private List<Long> getSelectedIds(HttpServletRequest servletRequest) {
@@ -74,8 +56,8 @@ public class SubmitAnswersController {
     private List<String> getIdsAsStringList(HttpServletRequest servletRequest, List<String> questionParameterNames) {
         List<String> selectedAnswerIds = new ArrayList<>();
         for (String parameterName : questionParameterNames) {
-            String answerId = servletRequest.getParameter(parameterName);
-            selectedAnswerIds.add(answerId);
+            String[] answerIds = servletRequest.getParameterValues(parameterName);
+            selectedAnswerIds.addAll(List.of(answerIds));
         }
         return selectedAnswerIds;
     }

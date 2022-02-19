@@ -11,7 +11,7 @@ public interface SurveyQuestionService {
 
     SurveyQuestionDomain findSurveyQuestionById(Long questionId);
 
-    void editQuestionText(Long questionId, String questionText);
+    void editQuestionText(Long questionId, String questionText, boolean multiselect);
 
     Long getSurveyIdByQuestionId(Long questionId);
 
