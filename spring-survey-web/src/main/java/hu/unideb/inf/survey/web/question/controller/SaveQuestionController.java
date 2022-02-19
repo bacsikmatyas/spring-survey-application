@@ -22,8 +22,9 @@ public class SaveQuestionController {
     @RequestMapping(REQUEST_MAPPING)
     public String saveQuestionController(HttpServletRequest request,
                                          @ModelAttribute(name = "questionId") Long questionId,
-                                         @ModelAttribute(name = "questionText") String questionText) {
-        surveyQuestionService.editQuestionText(questionId, questionText);
+                                         @ModelAttribute(name = "questionText") String questionText,
+                                         @ModelAttribute(name = "multiselect") boolean multiselect) {
+        surveyQuestionService.editQuestionText(questionId, questionText, multiselect);
         String referer = request.getHeader("Referer");
         String successParam = "&successfulSubmit";
         if (referer.contains(successParam)) {

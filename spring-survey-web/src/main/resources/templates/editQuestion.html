@@ -20,8 +20,19 @@
                     <label th:for="questionText">Question text</label>
                     <input th:name="questionText" th:value="${question.questionText}" type="text" class="form-control form-control-lg" th:id="questionText" placeholder="Edit question text" required>
                 </div>
+                <div class="form-group">
+                    <label>Multiselect?</label>
+                    <div class="form-check">
+                        <input th:name="multiselect" type="radio" class="form-check-input" th:id="multiselect" th:value="true">
+                        <label class="form-check-label" th:for="multiselect" th:text="yes"></label>
+                    </div>
+                    <div class="form-check">
+                        <input th:name="multiselect" type="radio" class="form-check-input" th:id="multiselect" th:value="false" checked>
+                        <label class="form-check-label" th:for="multiselect" th:text="no" th:name="multiselect"></label>
+                    </div>
+                </div>
                 <div class="text-center mt-3">
-                    <button type="submit" class="btn btn-primary m-auto w-25">Save texts</button>
+                    <button type="submit" class="btn btn-primary m-auto w-25">Save question</button>
                 </div>
             </form>
         </div>

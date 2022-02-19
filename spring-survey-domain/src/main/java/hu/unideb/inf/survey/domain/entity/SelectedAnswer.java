@@ -10,7 +10,7 @@ public class SelectedAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private QuestionAnswer answer;
 
     @ManyToOne

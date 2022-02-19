@@ -12,6 +12,8 @@ public class QuestionDto {
 
     private List<AnswerDto> answers;
 
+    private boolean multiselect;
+
     public List<AnswerDto> getAnswers() {
         return answers;
     }
@@ -34,5 +36,13 @@ public class QuestionDto {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
+    }
+
+    public boolean isMultiselect() {
+        return multiselect;
+    }
+
+    public void setMultiselect(boolean multiselect) {
+        this.multiselect = multiselect;
     }
 }

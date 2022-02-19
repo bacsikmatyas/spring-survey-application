@@ -26,6 +26,7 @@ public class SurveyQuestionDtoTransformer {
 
         questionDto.setId(surveyQuestionDomain.getId());
         questionDto.setQuestionText(surveyQuestionDomain.getQuestionText());
+        questionDto.setMultiselect(surveyQuestionDomain.isMultiselect());
 
         List<AnswerDto> answerDtos = new ArrayList<>();
         for(QuestionAnswerDomain questionAnswerDomain: surveyQuestionDomain.getAnswers()){

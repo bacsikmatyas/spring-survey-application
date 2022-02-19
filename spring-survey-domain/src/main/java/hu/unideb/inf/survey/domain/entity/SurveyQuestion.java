@@ -24,6 +24,9 @@ public class SurveyQuestion {
     @Column(name = "questionText", nullable = false)
     private String questionText;
 
+    @Column(name = "multiselect")
+    private boolean multiselect;
+
     public List<QuestionAnswer> getAnswers() {
         return answers;
     }
@@ -54,6 +57,14 @@ public class SurveyQuestion {
 
     public void setQuestionText(String questionText) {
         this.questionText = questionText;
+    }
+
+    public boolean isMultiselect() {
+        return multiselect;
+    }
+
+    public void setMultiselect(boolean multiselect) {
+        this.multiselect = multiselect;
     }
 
     @Override
