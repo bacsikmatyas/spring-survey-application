@@ -38,7 +38,7 @@ public class CheckSurveyController {
     @ModelAttribute("surveyData")
     public SurveyDataDto generateSurveyData(@RequestParam(name = "id") long surveyId){
         SurveyDataDto surveyData = new SurveyDataDto();
-
+        surveyData.setId(surveyId);
         List<SurveyQuestionDomain> questions = surveyQuestionService.findSurveyQuestionsBySurveyId(surveyId);
         Long numberOfSurveyTaken = selectedAnswerService.getNumberOfSurveyTaken(surveyId);
         List<QuestionStatisticDto> questionStatistics = questionStatisticDtoTransformer.from(questions, numberOfSurveyTaken);

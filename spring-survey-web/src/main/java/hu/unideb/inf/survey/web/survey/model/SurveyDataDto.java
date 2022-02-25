@@ -5,10 +5,19 @@ import hu.unideb.inf.survey.web.question.model.QuestionStatisticDto;
 import java.util.List;
 
 public class SurveyDataDto {
+    private Long id;
 
     private List<QuestionStatisticDto> questionStatistics;
 
     private Long countOfSurveyTaken;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getCountOfSurveyTaken() {
         return countOfSurveyTaken;
