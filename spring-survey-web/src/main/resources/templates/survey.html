@@ -10,13 +10,13 @@
             <h1>Survey Webapp</h1>
         </div>
         <div id="content">
-            <form th:action="@{/submitAnswers}" method="post">
+            <form th:action="@{/submitAnswers}" method="post" id="survey">
                 <div class="border-bottom w-75 p-2 mx-auto my-2">
                     <h1 th:text="${survey.surveyTitle}">Survey Title</h1>
                     <p th:text="${survey.surveyDescription}">Survey Description</p>
                 </div>
                 <input type="hidden" th:value="${survey.questions.size()}" th:name="numberOfQuestions"/>
-                <fieldset th:each="question, row : ${survey.questions}" class="form-group">
+                <fieldset th:each="question, row : ${survey.questions}" th:class="${question.multiselect}? 'form-group checkbox':'form-group'">
                     <div class="card w-75 p-2 mx-auto my-2">
                         <div class="card-body">
                             <h5 th:text="${(row.index+1)+'. '+question.questionText}" class="card-title">Question</h5>
@@ -42,5 +42,29 @@
         </div>
         <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>
         <script src="webjars/bootstrap/4.6.0/dist/js/bootstrap.bundle.js"></script>
+        <script>
+            $("input[type='checkbox']").change (function() {
+                $.each($("input[type='checkbox']"), function() {
+                        this.setCustomValidity('');
+                });
+                var checked = $("input[type='checkbox']:checked").length;
+                var needToBeChecked = $("fieldset.checkbox").length;
+                if (checked < needToBeChecked) {
+                    $("input[type='checkbox']")[0].setCustomValidity('Please select at least one checkbox.');
+                }
+            });
+            $("#survey").submit( function() {
+                var checked = $("input[type='checkbox']:checked").length;
+                var needToBeChecked = $("fieldset.checkbox").length;
+                console.log(checked);
+                console.log(needToBeChecked);
+                if (checked < needToBeChecked) {
+                    $("input[type='checkbox']")[0].setCustomValidity('Please select at least one checkbox.');
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+        </script>
     </body>
 </html>

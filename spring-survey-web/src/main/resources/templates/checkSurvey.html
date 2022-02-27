@@ -10,9 +10,20 @@
         <h1>Survey Webapp</h1>
     </div>
     <div id="content">
-        <div class="card w-50 p-2 mx-auto my-2">
-            <div class="card-body">
+        <div class="card w-25 p-2 mx-auto my-2">
+            <div class="card-body mx-auto">
                 <p>Number of survey taken: <span th:text="${surveyData.countOfSurveyTaken}"></span></p>
+                <div class="btn-group">
+                    <a th:href="@{/exportCsv(surveyId=${surveyData.id})}" class="btn btn-primary m-auto">
+                        Export as CSV
+                    </a>
+                    <a th:href="@{/exportXlsx(surveyId=${surveyData.id})}" class="btn btn-primary m-auto">
+                        Export as Xlsx
+                    </a>
+                    <a th:href="@{/exportJson(surveyId=${surveyData.id})}" class="btn btn-primary m-auto">
+                        Export as Json
+                    </a>
+                </div>
             </div>
         </div>
             <fieldset th:each="question, row : ${surveyData.questionStatistics}" class="form-group">

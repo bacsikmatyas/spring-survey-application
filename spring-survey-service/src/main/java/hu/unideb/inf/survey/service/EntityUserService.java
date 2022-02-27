@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserEntityService implements UserService{
+public class EntityUserService implements UserService{
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private UserTransformer userTransformer;
+    private final UserTransformer userTransformer;
 
     @Autowired
-    public UserEntityService(UserRepository userRepository, UserTransformer userTransformer) {
+    public EntityUserService(UserRepository userRepository, UserTransformer userTransformer) {
         this.userRepository = userRepository;
         this.userTransformer = userTransformer;
     }
