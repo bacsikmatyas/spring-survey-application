@@ -29,7 +29,7 @@
                         <td th:text="${survey.title}"></td>
                         <td th:text="${survey.description}"></td>
                         <td th:text="${survey.type}"></td>
-                        <td><a th:href="@{/checkSurvey(id=${survey.id})}" class="btn btn-success">Check Answers</a></td>
+                        <td><a th:href="@{/checkSurvey(id=${survey.id})}" class="btn btn-success">View Answers</a></td>
                         <td><a th:href="@{/editSurvey(id=${survey.id})}" class="btn btn-secondary">Edit</a></td>
                     </tr>
                     </tbody>
