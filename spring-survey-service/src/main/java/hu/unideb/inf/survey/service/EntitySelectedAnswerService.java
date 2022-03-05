@@ -39,13 +39,14 @@ public class EntitySelectedAnswerService implements SelectedAnswerService {
     }
 
     @Override
-    public void saveNewSelectedAnswer(long questionAnswerId, long userId) {
+    public void saveNewSelectedAnswer(long questionAnswerId, long userId, String freeText) {
         Optional<User> user = userRepository.findById(userId);
         Optional<QuestionAnswer> answer = questionAnswerRepository.findById(questionAnswerId);
         if (user.isPresent() && answer.isPresent()) {
             SelectedAnswer selectedAnswer = new SelectedAnswer();
             selectedAnswer.setAnswer(answer.get());
             selectedAnswer.setUser(user.get());
+            selectedAnswer.setFreetext(freeText);
             SelectedAnswer savedAnswer = selectedAnswerRepository.save(selectedAnswer);
             logger.info("'{}' answer with the id of {} is saved!", answer.get().getAnswerText(), savedAnswer.getId());
         } else {

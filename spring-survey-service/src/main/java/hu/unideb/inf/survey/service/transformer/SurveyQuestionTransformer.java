@@ -26,6 +26,7 @@ public class SurveyQuestionTransformer {
         surveyQuestionDomain.setId(surveyQuestion.getId());
         surveyQuestionDomain.setQuestionText(surveyQuestion.getQuestionText());
         surveyQuestionDomain.setMultiselect(surveyQuestion.isMultiselect());
+        surveyQuestionDomain.setFreetext(surveyQuestion.isFreetext());
 
         List<QuestionAnswerDomain> questionAnswerDomains = new ArrayList<>();
         for (QuestionAnswer questionAnswer : surveyQuestion.getAnswers()) {
@@ -42,6 +43,7 @@ public class SurveyQuestionTransformer {
         SurveyQuestion surveyQuestion = new SurveyQuestion();
         surveyQuestion.setQuestionText(surveyQuestionDomain.getQuestionText());
         surveyQuestion.setMultiselect(surveyQuestionDomain.isMultiselect());
+        surveyQuestion.setFreetext(surveyQuestionDomain.isFreetext());
         return surveyQuestion;
     }
 }

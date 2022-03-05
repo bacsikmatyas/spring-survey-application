@@ -13,6 +13,7 @@ public class SelectedAnswerTransformer {
         selectedAnswerDomain.setId(selectedAnswer.getId());
         selectedAnswerDomain.setQuestionAnswerId(selectedAnswer.getAnswer().getId());
         selectedAnswerDomain.setUserId(selectedAnswer.getUser().getId());
+        selectedAnswerDomain.setFreetext(selectedAnswer.getFreetext());
 
         return selectedAnswerDomain;
     }

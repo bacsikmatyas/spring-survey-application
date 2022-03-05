@@ -14,6 +14,8 @@ public class QuestionDto {
 
     private boolean multiselect;
 
+    private boolean freetext;
+
     public List<AnswerDto> getAnswers() {
         return answers;
     }
@@ -44,5 +46,13 @@ public class QuestionDto {
 
     public void setMultiselect(boolean multiselect) {
         this.multiselect = multiselect;
+    }
+
+    public boolean isFreetext() {
+        return freetext;
+    }
+
+    public void setFreetext(boolean freetext) {
+        this.freetext = freetext;
     }
 }

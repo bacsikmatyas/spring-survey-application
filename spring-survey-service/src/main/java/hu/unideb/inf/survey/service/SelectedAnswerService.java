@@ -5,7 +5,7 @@ import hu.unideb.inf.survey.service.domain.SelectedAnswerDomain;
 import java.util.List;
 
 public interface SelectedAnswerService {
-    void saveNewSelectedAnswer(long questionAnswerId, long userId);
+    void saveNewSelectedAnswer(long questionAnswerId, long userId, String freeText);
 
     List<SelectedAnswerDomain> getSelectedAnswersBySurveyId(long surveyId);
 

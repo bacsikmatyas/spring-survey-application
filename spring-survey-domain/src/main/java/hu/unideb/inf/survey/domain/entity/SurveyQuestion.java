@@ -27,6 +27,9 @@ public class SurveyQuestion {
     @Column(name = "multiselect")
     private boolean multiselect;
 
+    @Column(name = "freetext")
+    private boolean freetext;
+
     public List<QuestionAnswer> getAnswers() {
         return answers;
     }
@@ -65,6 +68,14 @@ public class SurveyQuestion {
 
     public void setMultiselect(boolean multiselect) {
         this.multiselect = multiselect;
+    }
+
+    public boolean isFreetext() {
+        return freetext;
+    }
+
+    public void setFreetext(boolean freetext) {
+        this.freetext = freetext;
     }
 
     @Override
