@@ -18,4 +18,9 @@ public class AddQuestionController {
     public Long getSurveyId(@RequestParam(name = "surveyId") Long surveyId) {
         return surveyId;
     }
+
+    @ModelAttribute("freetext")
+    public boolean isFreetext(@RequestParam(name = "freetext") boolean freetext) {
+        return freetext;
+    }
 }

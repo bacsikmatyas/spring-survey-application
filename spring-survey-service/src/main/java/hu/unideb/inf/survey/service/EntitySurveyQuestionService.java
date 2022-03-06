@@ -96,7 +96,7 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
     }
 
     @Override
-    public void saveNewQuestion(SurveyQuestionDomain surveyQuestionDomain) {
+    public Long saveNewQuestion(SurveyQuestionDomain surveyQuestionDomain) {
         SurveyQuestion surveyQuestion = surveyQuestionTransformer.from(surveyQuestionDomain);
         Long surveyId = surveyQuestionDomain.getSurvey().getId();
         Optional<Survey> optionalSurvey = surveyRepository.findById(surveyId);
@@ -107,6 +107,8 @@ public class EntitySurveyQuestionService implements SurveyQuestionService {
             logger.info("Survey not found with id {}", surveyId);
         }
         SurveyQuestion savedQuestion = surveyQuestionRepository.save(surveyQuestion);
-        logger.info("Question saved with id {}", savedQuestion.getId());
+        Long questionId = savedQuestion.getId();
+        logger.info("Question saved with id {}", questionId);
+        return questionId;
     }
 }
