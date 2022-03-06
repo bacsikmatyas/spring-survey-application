@@ -80,4 +80,23 @@ public class EntitySelectedAnswerService implements SelectedAnswerService {
         logger.info("The answer with id of {} was chosen {} time(s)!", id, String.format("%.0f", numberOfPicks));
         return numberOfPicks;
     }
+
+    @Override
+    public Double getNumberOfPicksOnFreetextAnswer(String freetext) {
+        Double numberOfPicks = selectedAnswerRepository.countSelectedAnswerByFreetext(freetext);
+        logger.info("The answer with text of '{}' was chosen {} time(s)!", freetext, String.format("%.0f", numberOfPicks));
+        return numberOfPicks;
+    }
+
+    @Override
+    public List<SelectedAnswerDomain> getGivenFreeTextAnswers(Long freeTextAnswerId) {
+        List<SelectedAnswer> selectedAnswers = selectedAnswerRepository.findSelectedAnswersByAnswer_Id(freeTextAnswerId);
+        List<SelectedAnswerDomain> selectedAnswerDomains = new ArrayList<>();
+        for (SelectedAnswer selectedAnswer : selectedAnswers) {
+            SelectedAnswerDomain tmp = selectedAnswerTransformer.from(selectedAnswer);
+            selectedAnswerDomains.add(tmp);
+        }
+        logger.info("{} freetext answer found for the answer with id of {}!", selectedAnswerDomains.size(), freeTextAnswerId);
+        return selectedAnswerDomains;
+    }
 }

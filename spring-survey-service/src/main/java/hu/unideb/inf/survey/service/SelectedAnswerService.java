@@ -12,4 +12,8 @@ public interface SelectedAnswerService {
     Long getNumberOfSurveyTaken(long surveyId);
 
     Double getNumberOfPicksOnAnAnswer(long id);
+
+    Double getNumberOfPicksOnFreetextAnswer(String freetext);
+
+    List<SelectedAnswerDomain> getGivenFreeTextAnswers(Long freeTextAnswerId);
 }

@@ -25,7 +25,7 @@ public class QuestionStatisticDtoTransformer {
         for (SurveyQuestionDomain question: questions){
             QuestionStatisticDto questionStatistic = new QuestionStatisticDto();
             questionStatistic.setQuestionText(question.getQuestionText());
-            questionStatistic.setAnswerStatistics(answerStatisticDtoTransformer.from(question.getAnswers(), numberOfSurveyTaken));
+            questionStatistic.setAnswerStatistics(answerStatisticDtoTransformer.from(question.getAnswers(), numberOfSurveyTaken, question.isFreetext()));
             questionStatistics.add(questionStatistic);
         }
 
