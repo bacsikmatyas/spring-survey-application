@@ -14,6 +14,8 @@ public class SurveyQuestionDomain {
 
     private boolean multiselect;
 
+    private boolean freetext;
+
     public Long getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class SurveyQuestionDomain {
 
     public void setMultiselect(boolean multiselect) {
         this.multiselect = multiselect;
+    }
+
+    public boolean isFreetext() {
+        return freetext;
+    }
+
+    public void setFreetext(boolean freetext) {
+        this.freetext = freetext;
     }
 }

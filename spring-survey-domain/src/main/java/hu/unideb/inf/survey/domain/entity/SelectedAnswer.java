@@ -16,6 +16,8 @@ public class SelectedAnswer {
     @ManyToOne
     private User user;
 
+    private String freetext;
+
     public Long getId() {
         return id;
     }
@@ -38,6 +40,14 @@ public class SelectedAnswer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getFreetext() {
+        return freetext;
+    }
+
+    public void setFreetext(String freetext) {
+        this.freetext = freetext;
     }
 
     @Override

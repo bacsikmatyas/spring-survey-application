@@ -32,7 +32,9 @@ public class SubmitAnswersController {
         List<Long> selectedIds = getSelectedIds(servletRequest);
         long currentUserId = Long.parseLong(currentUserIdString);
         for (long answerId : selectedIds) {
-            selectedAnswerService.saveNewSelectedAnswer(answerId, currentUserId);
+            String[] freeTexts = servletRequest.getParameterValues(answerId + "");
+            String freeText = freeTexts == null ? "" : freeTexts[0];
+            selectedAnswerService.saveNewSelectedAnswer(answerId, currentUserId, freeText);
         }
         return "redirect:" + HOMEPAGE_WITH_SUCCESS;
     }

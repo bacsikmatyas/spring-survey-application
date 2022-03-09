@@ -20,7 +20,10 @@
                     <label th:for="questionText">Question text</label>
                     <input th:name="questionText" th:value="${question.questionText}" type="text" class="form-control form-control-lg" th:id="questionText" placeholder="Edit question text" required>
                 </div>
-                <div class="form-group">
+                <div th:if="${question.freetext}">
+                    <input th:name="multiselect" type="hidden" th:id="multiselect" th:value="false">
+                </div>
+                <div th:unless="${question.freetext}" class="form-group">
                     <label>Multiselect?</label>
                     <div class="form-check">
                         <input th:name="multiselect" type="radio" class="form-check-input" th:id="multiselect" th:value="true">
@@ -36,27 +39,29 @@
                 </div>
             </form>
         </div>
-        <fieldset class="form-group">
-            <div class="card w-75 p-2 mx-auto my-2">
-                <div th:each="answer, row : ${question.answers}" class="card-body">
-                    <div class="col-sm-10">
-                        <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"></label>
-                        <div class="float-right">
-                            <a th:href="@{/editAnswer(id=${answer.id})}" class="btn btn-warning">
-                                Edit
-                            </a>
-                            <a th:href="@{/deleteAnswer(id=${answer.id})}" class="btn btn-danger">
-                                Delete
-                            </a>
+        <div th:unless="${question.freetext}">
+            <fieldset class="form-group">
+                <div class="card w-75 p-2 mx-auto my-2">
+                    <div th:each="answer, row : ${question.answers}" class="card-body">
+                        <div class="col-sm-10">
+                            <label th:text="${(row.index+1)+'. '+answer.answerText}" class="form-check-label"></label>
+                            <div class="float-right">
+                                <a th:href="@{/editAnswer(id=${answer.id})}" class="btn btn-warning">
+                                    Edit
+                                </a>
+                                <a th:href="@{/deleteAnswer(id=${answer.id})}" class="btn btn-danger">
+                                    Delete
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </fieldset>
+            <div class="text-center mt-3">
+                <a th:href="@{/addAnswer(questionId=${question.id})}" class="btn btn-success m-auto w-50">
+                    Add Answer
+                </a>
             </div>
-        </fieldset>
-        <div class="text-center mt-3">
-            <a th:href="@{/addAnswer(questionId=${question.id})}" class="btn btn-success m-auto w-50">
-                Add Answer
-            </a>
         </div>
         <div class="text-center mt-3">
             <a th:href="@{/editSurvey(id=${surveyId})}" class="btn btn-primary m-auto w-25">

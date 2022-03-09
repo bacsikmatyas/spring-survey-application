@@ -15,5 +15,5 @@ public interface SurveyQuestionService {
 
     Long getSurveyIdByQuestionId(Long questionId);
 
-    void saveNewQuestion(SurveyQuestionDomain surveyQuestionDomain);
+    Long saveNewQuestion(SurveyQuestionDomain surveyQuestionDomain);
 }

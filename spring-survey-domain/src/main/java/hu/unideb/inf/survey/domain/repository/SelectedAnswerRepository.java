@@ -13,7 +13,11 @@ public interface SelectedAnswerRepository extends CrudRepository<SelectedAnswer,
 
     Long countSelectedAnswersByAnswer_Id(Long id);
 
+    List<SelectedAnswer> findSelectedAnswersByAnswer_Id(Long id);
+
     Long countSelectedAnswersByAnswer_Question_Survey_Id(Long id);
 
     Double countSelectedAnswerByAnswer_Id(Long id);
+
+    Double countSelectedAnswerByFreetext(String freeText);
 }

@@ -7,6 +7,8 @@ public class SelectedAnswerDomain {
 
     private Long userId;
 
+    private String freetext;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +31,13 @@ public class SelectedAnswerDomain {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getFreetext() {
+        return freetext;
+    }
+
+    public void setFreetext(String freetext) {
+        this.freetext = freetext;
     }
 }
