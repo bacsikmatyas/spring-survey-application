@@ -18,11 +18,12 @@ public class SurveyDtoTransformer {
         this.surveyQuestionDtoTransformer = surveyQuestionDtoTransformer;
     }
 
-    public SurveyDto from(SurveyDomain surveyDomain){
+    public SurveyDto from(SurveyDomain surveyDomain) {
         SurveyDto surveyDto = new SurveyDto();
         surveyDto.setId(surveyDomain.getId());
         surveyDto.setSurveyTitle(surveyDomain.getTitle());
         surveyDto.setSurveyDescription(surveyDomain.getDescription());
+        surveyDto.setOpen(surveyDomain.getOpen());
 
         List<QuestionDto> questionDtos = surveyQuestionDtoTransformer.from(surveyDomain.getQuestions());
         surveyDto.setQuestions(questionDtos);

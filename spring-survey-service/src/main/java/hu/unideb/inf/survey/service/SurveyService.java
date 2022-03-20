@@ -14,4 +14,6 @@ public interface SurveyService {
     void editSurveyTexts(long surveyId, String title, String description);
 
     void saveNewSurvey(SurveyDomain surveyDomain);
+
+    void changeSurveyState(long surveyId);
 }
