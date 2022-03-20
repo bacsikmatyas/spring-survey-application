@@ -1,6 +1,5 @@
 package hu.unideb.inf.survey.web.export.transformer;
 
-import hu.unideb.inf.survey.service.SelectedAnswerService;
 import hu.unideb.inf.survey.service.domain.SurveyDomain;
 import hu.unideb.inf.survey.service.domain.SurveyQuestionDomain;
 import hu.unideb.inf.survey.web.export.model.QuestionToExport;
@@ -16,18 +15,16 @@ public class SurveyToExportTransformer {
 
     private final QuestionToExportTransformer questionToExportTransformer;
 
-    private final SelectedAnswerService selectedAnswerService;
 
     @Autowired
-    public SurveyToExportTransformer(QuestionToExportTransformer questionToExportTransformer, SelectedAnswerService selectedAnswerService) {
+    public SurveyToExportTransformer(QuestionToExportTransformer questionToExportTransformer) {
         this.questionToExportTransformer = questionToExportTransformer;
-        this.selectedAnswerService = selectedAnswerService;
     }
 
     public SurveyToExport from(SurveyDomain surveyDomain){
         SurveyToExport surveyToExport = new SurveyToExport();
         surveyToExport.setSurveyTitle(surveyDomain.getTitle());
-        surveyToExport.setNumberOfSurveyTaken(selectedAnswerService.getNumberOfSurveyTaken(surveyDomain.getId()));
+        surveyToExport.setNumberOfSurveyTaken(surveyDomain.getSurveyTaken());
 
         List<QuestionToExport> questions = new ArrayList<>();
         for (SurveyQuestionDomain questionDomain: surveyDomain.getQuestions()){

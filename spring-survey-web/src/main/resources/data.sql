@@ -21,17 +21,17 @@ VALUES ('Test Jack', 'password', 'USER');
 ------------ Default Surveys ------------
 -----------------------------------------
 
-INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN)
-VALUES (1, 'Races of Middle-earth', 'This survey contains some question about the fictional races that appear in J. R. R. Tolkien`s fantasy world of Middle-earth.', 'fantasy', true);
+INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN, SURVEY_TAKEN)
+VALUES (1, 'Races of Middle-earth', 'This survey contains some question about the fictional races that appear in J. R. R. Tolkien`s fantasy world of Middle-earth.', 'fantasy', true, 0);
 
-INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN)
-VALUES (1, 'Easy recipes!', 'I want to gather some information about the famous and easy recipes that people use every day in their life.', 'cooking', false);
+INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN, SURVEY_TAKEN)
+VALUES (1, 'Easy recipes!', 'I want to gather some information about the famous and easy recipes that people use every day in their life.', 'cooking', false, 0);
 
-INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN)
-VALUES (2, 'What about cars?', 'Let me ask some questions about your preferences when you are looking fo a new car.', 'cars', true);
+INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN, SURVEY_TAKEN)
+VALUES (2, 'What about cars?', 'Let me ask some questions about your preferences when you are looking fo a new car.', 'cars', true, 0);
 
-INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN)
-VALUES (3, 'Reading habits', 'Tell me about your reading habits!', 'books', true);
+INSERT INTO SURVEY (USER_ID, TITLE, DESCRIPTION, TYPE, OPEN, SURVEY_TAKEN)
+VALUES (3, 'Reading habits', 'Tell me about your reading habits!', 'books', true, 0);
 
 ----------------- END -------------------
 -----------------------------------------

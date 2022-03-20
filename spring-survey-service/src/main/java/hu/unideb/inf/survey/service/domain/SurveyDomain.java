@@ -17,6 +17,8 @@ public class SurveyDomain {
 
     private Boolean open;
 
+    private Long surveyTaken;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +73,13 @@ public class SurveyDomain {
 
     public void setOpen(Boolean open) {
         this.open = open;
+    }
+
+    public Long getSurveyTaken() {
+        return surveyTaken;
+    }
+
+    public void setSurveyTaken(Long surveyTaken) {
+        this.surveyTaken = surveyTaken;
     }
 }

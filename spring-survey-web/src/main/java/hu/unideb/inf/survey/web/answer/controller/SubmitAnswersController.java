@@ -1,9 +1,11 @@
 package hu.unideb.inf.survey.web.answer.controller;
 
 import hu.unideb.inf.survey.service.SelectedAnswerService;
+import hu.unideb.inf.survey.service.domain.SelectedAnswerDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,15 +29,21 @@ public class SubmitAnswersController {
 
     @PostMapping(REQUEST_MAPPING)
     public String submitAnswersController(@CookieValue("currentUserId") String currentUserIdString,
+                                          @ModelAttribute("surveyId") Long surveyId,
                                           HttpServletRequest servletRequest) {
 
         List<Long> selectedIds = getSelectedIds(servletRequest);
         long currentUserId = Long.parseLong(currentUserIdString);
+        List<SelectedAnswerDomain> selectedAnswerDomains = new ArrayList<>();
         for (long answerId : selectedIds) {
+            SelectedAnswerDomain selectedAnswerDomain = new SelectedAnswerDomain();
+            selectedAnswerDomain.setQuestionAnswerId(answerId);
+            selectedAnswerDomain.setUserId(currentUserId);
             String[] freeTexts = servletRequest.getParameterValues(answerId + "");
-            String freeText = freeTexts == null ? "" : freeTexts[0];
-            selectedAnswerService.saveNewSelectedAnswer(answerId, currentUserId, freeText);
+            selectedAnswerDomain.setFreetext(freeTexts == null ? "" : freeTexts[0]);
+            selectedAnswerDomains.add(selectedAnswerDomain);
         }
+        selectedAnswerService.saveNewSelectedAnswers(surveyId, selectedAnswerDomains, currentUserId);
         return "redirect:" + HOMEPAGE_WITH_SUCCESS;
     }
 

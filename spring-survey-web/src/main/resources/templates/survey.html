@@ -15,6 +15,7 @@
                     <h1 th:text="${survey.surveyTitle}">Survey Title</h1>
                     <p th:text="${survey.surveyDescription}">Survey Description</p>
                 </div>
+                <input type="hidden" th:value="${survey.id}" th:name="surveyId" th:id="surveyId">
                 <fieldset th:each="question, row : ${survey.questions}" th:class="${question.multiselect}? 'form-group checkbox':'form-group'">
                     <div th:unless="${question.freetext}" class="card w-75 p-2 mx-auto my-2">
                         <div class="card-body">

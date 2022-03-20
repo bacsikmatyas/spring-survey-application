@@ -30,9 +30,9 @@ public class SaveNewSurveyController {
         surveyDomain.setDescription(surveyDescription);
         surveyDomain.setType(surveyType);
         surveyDomain.setOpen(true);
+        surveyDomain.setSurveyTaken(0L);
         UserDomain userDomain = new UserDomain();
         userDomain.setId(currentUserId);
-        System.out.println("Current user "+ currentUserId);
         surveyDomain.setUser(userDomain);
 
         surveyService.saveNewSurvey(surveyDomain);
