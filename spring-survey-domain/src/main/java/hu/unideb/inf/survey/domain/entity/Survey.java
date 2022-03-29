@@ -33,6 +33,9 @@ public class Survey {
     @Column(name = "open", nullable = false)
     private Boolean open = true;
 
+    @Column(name = "survey_taken", nullable = false)
+    private Long surveyTaken;
+
     public List<SurveyQuestion> getQuestions() {
         return questions;
     }
@@ -87,6 +90,14 @@ public class Survey {
 
     public void setOpen(Boolean open) {
         this.open = open;
+    }
+
+    public Long getSurveyTaken() {
+        return surveyTaken;
+    }
+
+    public void setSurveyTaken(Long surveyTaken) {
+        this.surveyTaken = surveyTaken;
     }
 
     @Override

@@ -24,7 +24,7 @@
                     <input th:name="multiselect" type="hidden" th:id="multiselect" th:value="false">
                 </div>
                 <div th:unless="${question.freetext}" class="form-group">
-                    <label>Multiselect?</label>
+                    <label>Multiple choice?</label>
                     <div class="form-check">
                         <input th:name="multiselect" type="radio" class="form-check-input" th:id="multiselect" th:value="true">
                         <label class="form-check-label" th:for="multiselect" th:text="yes"></label>

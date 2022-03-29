@@ -11,6 +11,8 @@ public class SurveyDto {
 
     private String surveyDescription;
 
+    private boolean open;
+
     private List<QuestionDto> questions;
 
     public long getId() {
@@ -35,6 +37,14 @@ public class SurveyDto {
 
     public void setSurveyDescription(String surveyDescription) {
         this.surveyDescription = surveyDescription;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 
     public List<QuestionDto> getQuestions() {

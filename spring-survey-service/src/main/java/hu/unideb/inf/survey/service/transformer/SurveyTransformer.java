@@ -26,7 +26,6 @@ public class SurveyTransformer {
 
     public SurveyDomain from(Survey survey) {
         SurveyDomain surveyDomain = new SurveyDomain();
-
         UserDomain userDomain = userTransformer.from(survey.getUser());
 
         surveyDomain.setUser(userDomain);
@@ -35,6 +34,7 @@ public class SurveyTransformer {
         surveyDomain.setDescription(survey.getDescription());
         surveyDomain.setType(survey.getType());
         surveyDomain.setOpen(survey.getOpen());
+        surveyDomain.setSurveyTaken(survey.getSurveyTaken());
 
         List<SurveyQuestionDomain> surveyQuestionDomains = new ArrayList<>();
         for (SurveyQuestion question: survey.getQuestions()) {
@@ -53,6 +53,7 @@ public class SurveyTransformer {
         survey.setDescription(surveyDomain.getDescription());
         survey.setType(surveyDomain.getType());
         survey.setOpen(surveyDomain.getOpen());
+        survey.setSurveyTaken(surveyDomain.getSurveyTaken());
         return survey;
     }
 }

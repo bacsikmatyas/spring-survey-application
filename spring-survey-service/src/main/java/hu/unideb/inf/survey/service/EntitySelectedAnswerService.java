@@ -5,7 +5,7 @@ import hu.unideb.inf.survey.domain.entity.SelectedAnswer;
 import hu.unideb.inf.survey.domain.entity.User;
 import hu.unideb.inf.survey.domain.repository.QuestionAnswerRepository;
 import hu.unideb.inf.survey.domain.repository.SelectedAnswerRepository;
-import hu.unideb.inf.survey.domain.repository.SurveyQuestionRepository;
+import hu.unideb.inf.survey.domain.repository.SurveyRepository;
 import hu.unideb.inf.survey.domain.repository.UserRepository;
 import hu.unideb.inf.survey.service.domain.SelectedAnswerDomain;
 import hu.unideb.inf.survey.service.exception.UnsavableAnswerException;
@@ -14,44 +14,64 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EntitySelectedAnswerService implements SelectedAnswerService {
     private final SelectedAnswerRepository selectedAnswerRepository;
     private final UserRepository userRepository;
     private final QuestionAnswerRepository questionAnswerRepository;
+    private final SurveyRepository surveyRepository;
     private final SelectedAnswerTransformer selectedAnswerTransformer;
-    private final SurveyQuestionRepository surveyQuestionRepository;
 
     private final Logger logger = LoggerFactory.getLogger(EntitySelectedAnswerService.class);
 
     @Autowired
-    public EntitySelectedAnswerService(SelectedAnswerRepository selectedAnswerRepository, UserRepository userRepository, QuestionAnswerRepository questionAnswerRepository, SelectedAnswerTransformer selectedAnswerTransformer, SurveyQuestionRepository surveyQuestionRepository) {
+    public EntitySelectedAnswerService(SelectedAnswerRepository selectedAnswerRepository, UserRepository userRepository, QuestionAnswerRepository questionAnswerRepository, SurveyRepository surveyRepository, SelectedAnswerTransformer selectedAnswerTransformer) {
         this.selectedAnswerRepository = selectedAnswerRepository;
         this.userRepository = userRepository;
         this.questionAnswerRepository = questionAnswerRepository;
+        this.surveyRepository = surveyRepository;
         this.selectedAnswerTransformer = selectedAnswerTransformer;
-        this.surveyQuestionRepository = surveyQuestionRepository;
     }
 
     @Override
-    public void saveNewSelectedAnswer(long questionAnswerId, long userId, String freeText) {
-        Optional<User> user = userRepository.findById(userId);
-        Optional<QuestionAnswer> answer = questionAnswerRepository.findById(questionAnswerId);
-        if (user.isPresent() && answer.isPresent()) {
+    @Transactional
+    public void saveNewSelectedAnswers(Long surveyId, List<SelectedAnswerDomain> selectedAnswerDomains, long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> {
+            throw new UnsavableAnswerException("Cannot find the user in the database!");
+        });
+        Map<Long, QuestionAnswer> mapOfQuestionAnswers = getMapOfQuestionAnswers(selectedAnswerDomains);
+        List<SelectedAnswer> selectedAnswers = getSelectedAnswersToBeSaved(selectedAnswerDomains, user, mapOfQuestionAnswers);
+        selectedAnswerRepository.saveAll(selectedAnswers);
+        surveyRepository.increaseTakenCount(surveyId);
+        logger.info("{} answer is saved!", selectedAnswers.size());
+    }
+
+    private List<SelectedAnswer> getSelectedAnswersToBeSaved(List<SelectedAnswerDomain> selectedAnswerDomains, User user, Map<Long, QuestionAnswer> mapOfQuestionAnswers) {
+        List<SelectedAnswer> selectedAnswers = new ArrayList<>();
+        for (SelectedAnswerDomain selectedAnswerDomain: selectedAnswerDomains){
             SelectedAnswer selectedAnswer = new SelectedAnswer();
-            selectedAnswer.setAnswer(answer.get());
-            selectedAnswer.setUser(user.get());
-            selectedAnswer.setFreetext(freeText);
-            SelectedAnswer savedAnswer = selectedAnswerRepository.save(selectedAnswer);
-            logger.info("'{}' answer with the id of {} is saved!", answer.get().getAnswerText(), savedAnswer.getId());
-        } else {
-            throw new UnsavableAnswerException("Cannot find the user or the answer to be selected in the database!");
+            selectedAnswer.setAnswer(mapOfQuestionAnswers.get(selectedAnswerDomain.getQuestionAnswerId()));
+            selectedAnswer.setUser(user);
+            selectedAnswer.setFreetext(selectedAnswerDomain.getFreetext());
+            selectedAnswers.add(selectedAnswer);
         }
+        return selectedAnswers;
+    }
+
+    private Map<Long, QuestionAnswer> getMapOfQuestionAnswers(List<SelectedAnswerDomain> selectedAnswerDomains) {
+        List<Long> collectedAnswerIds = selectedAnswerDomains.stream().map(SelectedAnswerDomain::getQuestionAnswerId).collect(Collectors.toList());
+        Iterable<QuestionAnswer> allById = questionAnswerRepository.findAllById(collectedAnswerIds);
+        Map<Long, QuestionAnswer> questionAnswerMap = new HashMap<>();
+        allById.forEach(questionAnswer -> questionAnswerMap.put(questionAnswer.getId(), questionAnswer));
+        if (collectedAnswerIds.size() < questionAnswerMap.size()){
+            throw new UnsavableAnswerException("One or more answer cannot be found!");
+        }
+        return questionAnswerMap;
     }
 
     @Override
@@ -64,14 +84,6 @@ public class EntitySelectedAnswerService implements SelectedAnswerService {
         }
         logger.info("{} answer found for the survey with id of {}!", selectedAnswerDomains.size(), surveyId);
         return selectedAnswerDomains;
-    }
-
-    @Override
-    public Long getNumberOfSurveyTaken(long surveyId) {
-        long allAnswerGiven = selectedAnswerRepository.countSelectedAnswersByAnswer_Question_Survey_Id(surveyId);
-        long correctNumberOfAnswers = allAnswerGiven / surveyQuestionRepository.countSurveyQuestionsBySurvey_Id(surveyId);
-        logger.info("{} user took the survey with id of {}!", correctNumberOfAnswers, surveyId);
-        return correctNumberOfAnswers;
     }
 
     @Override

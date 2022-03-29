@@ -5,11 +5,9 @@ import hu.unideb.inf.survey.service.domain.SelectedAnswerDomain;
 import java.util.List;
 
 public interface SelectedAnswerService {
-    void saveNewSelectedAnswer(long questionAnswerId, long userId, String freeText);
+    void saveNewSelectedAnswers(Long surveyId, List<SelectedAnswerDomain> selectedAnswerDomains, long userId);
 
     List<SelectedAnswerDomain> getSelectedAnswersBySurveyId(long surveyId);
-
-    Long getNumberOfSurveyTaken(long surveyId);
 
     Double getNumberOfPicksOnAnAnswer(long id);
 
